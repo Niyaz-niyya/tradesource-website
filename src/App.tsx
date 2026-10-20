@@ -35,7 +35,7 @@ function Header({locale}:{locale:Locale}) {
   const {t}=useTranslation(); const navigate=useNavigate(); const location=useLocation(); const [menu,setMenu]=useState(false); const [dark,setDark]=useState(()=>localStorage.getItem('ujr-theme')==='dark'||(!localStorage.getItem('ujr-theme')&&matchMedia('(prefers-color-scheme: dark)').matches));
   useEffect(()=>{document.documentElement.dataset.theme=dark?'dark':'light';localStorage.setItem('ujr-theme',dark?'dark':'light')},[dark]);
   const switchLocale=(next:Locale)=>{const rest=location.pathname.replace(/^\/(en|zh|ar)/,'');navigate(`/${next}${rest||'/'}`)};
-  const nav=[['home',''],['about','about'],['products','products'],['services','services'],['why','why'],['contact','contact']];
+  const nav=[['home',''],['about','about'],['products','products'],['services','services'],['contact','contact']];
   const handleNavigation=(hash:string)=>{setMenu(false);if(location.pathname===`/${locale}/`){requestAnimationFrame(()=>{if(hash)document.getElementById(hash)?.scrollIntoView({behavior:'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'})})}};
   return <header className="site-header"><div className="header-inner"><div className="brand-wrap"><Logo/><span className="brand-tagline">{t('common.tagline')}</span></div>
     <nav className={menu?'open':''} aria-label="Primary navigation">{nav.map(([key,hash])=><Link className={(location.hash.slice(1)||'home')===key?'active':''} key={key} onClick={()=>handleNavigation(hash)} to={`/${locale}/${hash?'#'+hash:''}`}>{t(`nav.${key}`)}</Link>)}</nav>
