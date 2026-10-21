@@ -37,3 +37,13 @@ For rollback, retain the previous `dist` archive before upload and restore it if
 Verified company details and typed product/service content live in `src/data/content.ts`. The incomplete China phone number and unconfirmed alternative China addresses are intentionally not exposed. In a future API phase, replace these local exports through a small data service while preserving the component-facing types in `src/types.ts`.
 
 No backend, database, authentication, cart, or payment system is included in this phase.
+
+## GitHub Pages deployment
+
+The site is deployed automatically from the `main` branch through GitHub Actions.
+
+Repository: `Niyaz-niyya/tradesource-website`
+
+Live URL: `https://niyaz-niyya.github.io/tradesource-website/`
+
+In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. Every later push to `main` will rebuild and publish the website.
