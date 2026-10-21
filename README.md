@@ -46,4 +46,4 @@ Repository: `Niyaz-niyya/tradesource-website`
 
 Live URL: `https://niyaz-niyya.github.io/tradesource-website/`
 
-In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. Every later push to `main` will rebuild and publish the website.
+The deployment workflow enables GitHub Pages and publishes the production build. Every later push to `main` will rebuild and update the website automatically.
