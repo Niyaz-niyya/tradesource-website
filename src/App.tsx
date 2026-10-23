@@ -29,8 +29,8 @@ function FloatingEnquiry() {
   },[open]);
   return <>
     <div className="floating-actions" aria-label="Quick contact options">
-      <button ref={triggerRef} className="floating-enquiry" type="button" onClick={()=>setOpen(true)} aria-haspopup="dialog"><span>Make an<br/>enquiry</span><i><Icons.ClipboardPenLine aria-hidden="true"/></i></button>
-      <a className="floating-whatsapp" href={whatsapp('Hello UJR TradeSource, I would like to make an enquiry.')} target="_blank" rel="noreferrer" aria-label="Enquire on WhatsApp"><Icons.MessageCircle aria-hidden="true"/><Icons.Phone className="whatsapp-phone" aria-hidden="true"/></a>
+      <button ref={triggerRef} className="floating-action floating-enquiry" type="button" onClick={()=>setOpen(true)} aria-haspopup="dialog"><span className="floating-action-label">Make an enquiry</span><i className="floating-action-icon"><Icons.ClipboardPenLine aria-hidden="true"/></i></button>
+      <a className="floating-action floating-whatsapp" href={whatsapp('Hello UJR TradeSource, I would like to make an enquiry.')} target="_blank" rel="noreferrer" aria-label="Enquire on WhatsApp"><span className="floating-action-label">WhatsApp</span><i className="floating-action-icon"><Icons.MessageCircle aria-hidden="true"/><Icons.Phone className="whatsapp-phone" aria-hidden="true"/></i></a>
     </div>
     {open&&<div className="enquiry-modal-backdrop" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)setOpen(false)}}>
       <section className="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enquiry-title">
