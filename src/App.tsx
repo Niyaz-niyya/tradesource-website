@@ -57,13 +57,12 @@ function Logo({inverse=false}:{inverse?:boolean}) {
 
 function LanguagePicker({locale,onPrimary}:{locale:Locale;onPrimary:(l:Locale)=>void}) {
   const {t}=useTranslation(); const [open,setOpen]=useState(false); const wrap=useRef<HTMLDivElement>(null);
-  const [selected,setSelected]=useState<Locale[]>(()=>{ try { const s=JSON.parse(localStorage.getItem('ujr-languages')||'["en"]'); return Array.isArray(s)&&s.length?s:['en']; } catch{return ['en'];}});
   useEffect(()=>{const close=(e:MouseEvent)=>{if(!wrap.current?.contains(e.target as Node))setOpen(false)};document.addEventListener('mousedown',close);return()=>document.removeEventListener('mousedown',close)},[]);
-  useEffect(()=>{if(!selected.includes(locale)){const next=[...selected,locale];setSelected(next);localStorage.setItem('ujr-languages',JSON.stringify(next))}},[locale,selected]);
-  const toggle=(code:Locale)=>{let next=selected.includes(code)?selected.filter(x=>x!==code):[...selected,code];if(!next.length)next=['en'];setSelected(next);localStorage.setItem('ujr-languages',JSON.stringify(next));if(next.includes(code))onPrimary(code);else if(code===locale)onPrimary(next[next.length-1]);};
+  const select=(code:Locale)=>{setOpen(false);if(code!==locale)onPrimary(code)};
+  const active=locales.find(item=>item.code===locale)??locales[0];
   return <div className="language" ref={wrap}>
-    <button className="icon-button language-trigger" onClick={()=>setOpen(!open)} aria-expanded={open}><Icons.Languages size={17}/><span>{selected.map(x=>locales.find(l=>l.code===x)?.short).join(' + ')}</span><Icons.ChevronDown size={14}/></button>
-    {open&&<div className="language-popover"><strong>{t('language.title')}</strong><p>{t('language.hint')}</p>{locales.map(item=><label key={item.code}><input type="checkbox" checked={selected.includes(item.code)} onChange={()=>toggle(item.code)}/><span>{item.label}</span>{locale===item.code&&<em>Primary</em>}</label>)}</div>}
+    <button className="icon-button language-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-haspopup="listbox"><Icons.Languages size={17}/><span>{active.short}</span><Icons.ChevronDown size={14}/></button>
+    {open&&<div className="language-popover" role="listbox" aria-label={t('language.title')}><strong>{t('language.title')}</strong><p>{t('language.hint')}</p>{locales.map(item=>{const selected=item.code===locale;return <button type="button" role="option" aria-selected={selected} className={`language-option${selected?' selected':''}`} key={item.code} onClick={()=>select(item.code)}><i>{selected&&<Icons.Check/>}</i><span>{item.label}</span>{selected&&<em>{t('language.primary')}</em>}</button>})}</div>}
   </div>;
 }
 

@@ -14,7 +14,7 @@ const resources = {
     portfolio:{kicker:'Featured products',title:'Our Product Portfolio'},
     social:{title:'Follow Us & Stay Connected',body:'Get the latest updates, new products and global trade insights.',enquiry:'Send Us an Enquiry',enquiryBody:'We are here to help. Tell us what you need and our team will get back to you.',button:'Send Enquiry'},
     footer:{quick:'Quick Links',contact:'Contact Us',locations:'Locations',privacy:'Privacy Policy',terms:'Terms & Conditions',rights:'All rights reserved.'},
-    language:{title:'Display languages',hint:'Choose one or more. The last selected language becomes the primary display language.'},
+    language:{title:'Display language',hint:'Choose the language used across the website.',primary:'Primary'},
     detail:{subcategories:'Available subcategories',needHelp:'Need help sourcing this category?',back:'Back to all categories'},
     notFound:{title:'Page not found',body:'The page you requested could not be found.',home:'Return home'}
   }},
@@ -30,7 +30,7 @@ const resources = {
     portfolio:{kicker:'精选产品',title:'我们的产品组合'},
     social:{title:'关注我们，保持联系',body:'获取最新动态、新产品与全球贸易资讯。',enquiry:'发送咨询',enquiryBody:'告诉我们您的需求，我们的团队将与您联系。',button:'发送咨询'},
     footer:{quick:'快速链接',contact:'联系方式',locations:'办公地点',privacy:'隐私政策',terms:'条款与条件',rights:'版权所有。'},
-    language:{title:'显示语言',hint:'可选择一种或多种语言，最后选择的语言将作为主显示语言。'},
+    language:{title:'显示语言',hint:'选择网站使用的显示语言。',primary:'主要语言'},
     detail:{subcategories:'可提供的子类别',needHelp:'需要采购此类别吗？',back:'返回所有类别'},
     notFound:{title:'页面未找到',body:'找不到您请求的页面。',home:'返回首页'}
   }},
@@ -46,7 +46,7 @@ const resources = {
     portfolio:{kicker:'منتجات مختارة',title:'مجموعة منتجاتنا'},
     social:{title:'تابعنا وابقَ على تواصل',body:'احصل على آخر الأخبار والمنتجات الجديدة ورؤى التجارة العالمية.',enquiry:'أرسل استفسارك',enquiryBody:'نحن هنا للمساعدة. أخبرنا بما تحتاج وسيتواصل فريقنا معك.',button:'إرسال استفسار'},
     footer:{quick:'روابط سريعة',contact:'اتصل بنا',locations:'المواقع',privacy:'سياسة الخصوصية',terms:'الشروط والأحكام',rights:'جميع الحقوق محفوظة.'},
-    language:{title:'لغات العرض',hint:'اختر لغة أو أكثر. تصبح آخر لغة حددتها لغة العرض الرئيسية.'},
+    language:{title:'لغة العرض',hint:'اختر اللغة المستخدمة في الموقع.',primary:'الأساسية'},
     detail:{subcategories:'الفئات الفرعية المتاحة',needHelp:'هل تحتاج للمساعدة في توريد هذه الفئة؟',back:'العودة إلى كل الفئات'},
     notFound:{title:'الصفحة غير موجودة',body:'تعذر العثور على الصفحة المطلوبة.',home:'العودة للرئيسية'}
   }}
