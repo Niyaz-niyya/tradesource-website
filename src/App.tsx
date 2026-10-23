@@ -13,6 +13,42 @@ const localeSet = new Set(locales.map(x=>x.code));
 const local = (value: LocalizedText, locale: Locale) => value[locale];
 const whatsapp = (message:string) => `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(message)}`;
 
+function FloatingEnquiry() {
+  const [open,setOpen]=useState(false);
+  const triggerRef=useRef<HTMLButtonElement>(null);
+  const firstFieldRef=useRef<HTMLInputElement>(null);
+  useEffect(()=>{
+    if(!open)return;
+    const trigger=triggerRef.current;
+    const previousOverflow=document.body.style.overflow;
+    document.body.style.overflow='hidden';
+    const focusTimer=window.setTimeout(()=>firstFieldRef.current?.focus(),0);
+    const closeOnEscape=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};
+    document.addEventListener('keydown',closeOnEscape);
+    return()=>{window.clearTimeout(focusTimer);document.body.style.overflow=previousOverflow;document.removeEventListener('keydown',closeOnEscape);trigger?.focus()};
+  },[open]);
+  return <>
+    <div className="floating-actions" aria-label="Quick contact options">
+      <button ref={triggerRef} className="floating-enquiry" type="button" onClick={()=>setOpen(true)} aria-haspopup="dialog"><span>Make an<br/>enquiry</span><i><Icons.ClipboardPenLine aria-hidden="true"/></i></button>
+      <a className="floating-whatsapp" href={whatsapp('Hello UJR TradeSource, I would like to make an enquiry.')} target="_blank" rel="noreferrer" aria-label="Enquire on WhatsApp"><Icons.MessageCircle aria-hidden="true"/><Icons.Phone className="whatsapp-phone" aria-hidden="true"/></a>
+    </div>
+    {open&&<div className="enquiry-modal-backdrop" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)setOpen(false)}}>
+      <section className="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enquiry-title">
+        <button className="enquiry-close" type="button" onClick={()=>setOpen(false)} aria-label="Close enquiry form"><Icons.X/></button>
+        <div className="enquiry-modal-heading"><span><Icons.ClipboardPenLine/></span><div><p className="eyebrow">Let’s work together</p><h2 id="enquiry-title">Make an enquiry</h2><p>Tell us what you need and our team will get back to you.</p></div></div>
+        <form className="enquiry-form" onSubmit={event=>event.preventDefault()}>
+          <label className="field-wide" htmlFor="enquiry-name">Full name<input ref={firstFieldRef} id="enquiry-name" name="fullName" type="text" autoComplete="name" required placeholder="Enter your full name"/></label>
+          <label htmlFor="enquiry-company">Company<input id="enquiry-company" name="company" type="text" autoComplete="organization" required placeholder="Company name"/></label>
+          <label htmlFor="enquiry-email">Email<input id="enquiry-email" name="email" type="email" autoComplete="email" required placeholder="name@company.com"/></label>
+          <label className="field-wide" htmlFor="enquiry-contact">Contact No.<input id="enquiry-contact" name="contactNumber" type="tel" autoComplete="tel" required placeholder="Enter your contact number"/></label>
+          <label className="field-wide" htmlFor="enquiry-message">Enquiry or feedback<textarea id="enquiry-message" name="message" rows={5} required placeholder="How can we help you?"/></label>
+          <button className="button button-blue enquiry-submit field-wide" type="submit">Submit enquiry <Icons.ArrowRight size={17}/></button>
+        </form>
+      </section>
+    </div>}
+  </>;
+}
+
 function Logo({inverse=false}:{inverse?:boolean}) {
   return <Link to="/en/" className={`logo ${inverse?'inverse':''}`} aria-label="UJR TradeSource home">
     <span className="logo-mark"><Icons.Globe2/><Icons.MoveUpRight/></span><span className="logo-type"><b>UJR</b><small>TradeSource</small></span>
@@ -76,7 +112,7 @@ function HomePage({locale}:{locale:Locale}) {
   const serviceIcons=[Icons.Search,Icons.Settings,Icons.Tags,Icons.ShieldCheck,Icons.Ship];
   useScrollReveal(locale);
   return <><Seo locale={locale}/><Header locale={locale}/><main>
-    <section id="home" className="hero"><div className="hero-bg"/><div className="container hero-content"><div className="hero-copy"><p className="eyebrow">{t('common.eyebrow')}</p><h1>{t('hero.titleA')} <span>{t('hero.titleB')}</span></h1><p className="hero-lead">{t('hero.body')}</p><div className="hero-features">{['quality','prices','suppliers','shipping'].map((key,i)=>{const Icon=featureIcons[i];return <div key={key}><i><Icon/></i><span>{t(`hero.${key}`)}</span></div>})}</div><div className="hero-buttons"><a className="button button-whatsapp" href={whatsapp('Hello UJR TradeSource, I would like to make a general enquiry.')} target="_blank" rel="noreferrer"><Icons.MessageCircle size={19}/>{t('common.enquire')}</a><a className="button button-outline" href="#services">{t('hero.services')}<Icons.ArrowRight size={17}/></a></div></div></div>
+    <section id="home" className="hero"><div className="hero-bg"/><div className="container hero-content"><div className="hero-copy"><p className="eyebrow">{t('common.eyebrow')}</p><h1>{t('hero.titleA')} <span>{t('hero.titleB')}</span></h1><p className="hero-lead">{t('hero.body')}</p><div className="hero-features">{['quality','prices','suppliers','shipping'].map((key,i)=>{const Icon=featureIcons[i];return <div key={key}><i><Icon/></i><span>{t(`hero.${key}`)}</span></div>})}</div><div className="hero-buttons"><a className="button button-outline" href="#services">{t('hero.services')}<Icons.ArrowRight size={17}/></a></div></div></div>
     </section>
     <section id="products" className="section products-section"><div className="container"><div className="section-head" data-reveal><div><p className="eyebrow">{t('products.kicker')}</p><h2>{t('products.titleA')} <span>{t('products.titleB')}</span></h2></div><div><p>{t('products.body')}</p></div></div><div className="product-grid" id="product-grid">{categories.map((cat,i)=><Link to={`/${locale}/category/${cat.slug}`} className="product-card" data-reveal style={revealDelay((i%6)*55)} key={cat.slug}><ProductImage position={cat.imagePosition}/><span>{local(cat.title,locale)}</span><Icons.ArrowUpRight size={17}/></Link>)}</div></div></section>
     <section id="services" className="section services-section"><div className="container"><div className="section-head" data-reveal><div><p className="eyebrow">{t('services.kicker')}</p><h2>{t('services.title')}</h2></div><p>{t('services.body')}</p></div><div className="services-grid">{services.map((service,i)=>{const Icon=serviceIcons[i];return <article className="service-card" data-reveal style={revealDelay(i*70)} key={service.slug}><i><Icon/></i><h3>{local(service.title,locale)}</h3><p>{local(service.description,locale)}</p><a href={whatsapp(`Hello UJR TradeSource, I would like to enquire about ${service.title.en}.`)} target="_blank" rel="noreferrer">{t('common.learn')} <Icons.ArrowRight size={15}/></a></article>})}</div></div></section>
@@ -100,4 +136,4 @@ function NotFound({locale}:{locale:Locale}) {const {t}=useTranslation();return <
 
 function LocaleRoutes() { const params=useParams(); const locale=(localeSet.has(params.locale as Locale)?params.locale:'en') as Locale; const {i18n}=useTranslation(); useEffect(()=>{i18n.changeLanguage(locale)},[locale,i18n]); return <Routes><Route index element={<HomePage locale={locale}/>}/><Route path="category/:slug" element={<CategoryPage locale={locale}/>}/><Route path="*" element={<NotFound locale={locale}/>}/></Routes> }
 
-export default function App(){return <><ScrollToHash/><Routes><Route path="/" element={<Navigate to="/en/" replace/>}/><Route path="/:locale/*" element={<LocaleRoutes/>}/><Route path="*" element={<Navigate to="/en/" replace/>}/></Routes></>}
+export default function App(){return <><ScrollToHash/><Routes><Route path="/" element={<Navigate to="/en/" replace/>}/><Route path="/:locale/*" element={<LocaleRoutes/>}/><Route path="*" element={<Navigate to="/en/" replace/>}/></Routes><FloatingEnquiry/></>}

@@ -59,3 +59,42 @@ section[id],article[id]{scroll-margin-top:90px}
 .about-section .about-grid{grid-template-columns:minmax(0,2.15fr) minmax(220px,.95fr);max-width:1050px;margin-inline:auto}
 @media(max-width:1080px){.about-section .about-grid{grid-template-columns:minmax(0,1.7fr) minmax(220px,1fr);max-width:900px}}
 @media(max-width:760px){.about-section .about-grid{grid-template-columns:1fr;max-width:680px}}
+
+/* Persistent enquiry actions and modal. */
+.floating-actions{position:fixed;z-index:45;right:24px;bottom:28px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;filter:drop-shadow(0 9px 15px rgba(2,39,70,.22))}
+.floating-enquiry,.floating-whatsapp{border:0;background:#033b67;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.floating-enquiry{height:62px;border-radius:32px;padding:0 9px 0 22px;gap:14px;text-align:left;text-transform:uppercase;font-size:11px;font-weight:800;line-height:1.05;letter-spacing:.2px}
+.floating-enquiry i{width:46px;height:46px;border-left:1px solid rgba(255,255,255,.22);display:grid;place-items:center;font-style:normal}
+.floating-enquiry svg{width:23px;height:23px}
+.floating-whatsapp{position:relative;width:58px;height:58px;border-radius:50%}
+.floating-whatsapp>svg:first-child{width:29px;height:29px;stroke-width:1.8}
+.floating-whatsapp .whatsapp-phone{position:absolute;width:13px;height:13px;stroke-width:2.7;transform:rotate(-18deg)}
+.floating-enquiry,.floating-whatsapp{transition:transform .25s cubic-bezier(.22,1,.36,1),background .25s ease,box-shadow .25s ease}
+.floating-enquiry:hover,.floating-whatsapp:hover{background:#075a91;transform:translateY(-3px);box-shadow:0 10px 22px rgba(2,39,70,.22)}
+.enquiry-modal-backdrop{position:fixed;z-index:100;inset:0;background:rgba(3,22,39,.66);backdrop-filter:blur(7px);display:grid;place-items:center;padding:24px;animation:modalFade .2s ease both}
+.enquiry-modal{position:relative;width:min(620px,100%);max-height:min(780px,calc(100vh - 48px));overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:0 28px 80px rgba(0,27,50,.3);padding:32px;animation:modalRise .35s cubic-bezier(.22,1,.36,1) both}
+.enquiry-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:var(--surface-2);color:var(--navy);display:grid;place-items:center;cursor:pointer;transition:transform .2s ease,background .2s ease}
+.enquiry-close:hover{transform:rotate(6deg);background:var(--pale)}
+.enquiry-close svg{width:19px}
+.enquiry-modal-heading{display:flex;align-items:flex-start;gap:16px;padding-right:42px;margin-bottom:25px}
+.enquiry-modal-heading>span{width:48px;height:48px;flex:0 0 auto;border-radius:14px;background:#dcf1ff;color:var(--blue);display:grid;place-items:center}
+.enquiry-modal-heading>span svg{width:23px}
+.enquiry-modal-heading h2{margin:2px 0 6px;color:var(--navy);font-size:27px;letter-spacing:-.8px}
+.enquiry-modal-heading p:not(.eyebrow){margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+.enquiry-form{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.enquiry-form label{display:grid;gap:7px;color:var(--navy);font-size:11px;font-weight:800}
+.enquiry-form .field-wide{grid-column:1/-1}
+.enquiry-form input,.enquiry-form textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--text);padding:12px 13px;font:inherit;font-size:13px;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.enquiry-form input{height:45px}
+.enquiry-form textarea{resize:vertical;min-height:112px}
+.enquiry-form input::placeholder,.enquiry-form textarea::placeholder{color:color-mix(in srgb,var(--muted) 72%,transparent)}
+.enquiry-form input:focus,.enquiry-form textarea:focus{border-color:#39a2e8;background:var(--surface);box-shadow:0 0 0 3px rgba(42,168,244,.13)}
+.enquiry-submit{justify-self:start;min-width:166px;margin-top:2px;cursor:pointer}
+[dir="rtl"] .floating-actions{right:auto;left:24px;align-items:flex-start}
+[dir="rtl"] .floating-enquiry{padding:0 22px 0 9px;text-align:right}
+[dir="rtl"] .floating-enquiry i{border-left:0;border-right:1px solid rgba(255,255,255,.22)}
+[dir="rtl"] .enquiry-close{right:auto;left:18px}
+[dir="rtl"] .enquiry-modal-heading{padding-right:0;padding-left:42px}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+@keyframes modalRise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:600px){.floating-actions{right:14px;bottom:16px;gap:8px}.floating-enquiry{height:54px;border-radius:28px;padding-left:17px;gap:9px}.floating-enquiry i{width:39px;height:39px}.floating-whatsapp{width:52px;height:52px}.enquiry-modal-backdrop{padding:12px;align-items:end}.enquiry-modal{max-height:calc(100vh - 24px);border-radius:20px 20px 14px 14px;padding:25px 18px 20px}.enquiry-form{grid-template-columns:1fr;gap:14px}.enquiry-form .field-wide{grid-column:auto}.enquiry-modal-heading{padding-right:38px}.enquiry-modal-heading>span{width:42px;height:42px}.enquiry-modal-heading h2{font-size:24px}[dir="rtl"] .floating-actions{right:auto;left:14px}}
