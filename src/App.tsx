@@ -14,6 +14,7 @@ const local = (value: LocalizedText, locale: Locale) => value[locale];
 const whatsapp = (message:string) => `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(message)}`;
 
 function FloatingEnquiry() {
+  const {t}=useTranslation();
   const [open,setOpen]=useState(false);
   const triggerRef=useRef<HTMLButtonElement>(null);
   const firstFieldRef=useRef<HTMLInputElement>(null);
@@ -28,21 +29,21 @@ function FloatingEnquiry() {
     return()=>{window.clearTimeout(focusTimer);document.body.style.overflow=previousOverflow;document.removeEventListener('keydown',closeOnEscape);trigger?.focus()};
   },[open]);
   return <>
-    <div className="floating-actions" aria-label="Quick contact options">
-      <button ref={triggerRef} className="floating-action floating-enquiry" type="button" onClick={()=>setOpen(true)} aria-haspopup="dialog"><span className="floating-action-label">Make an enquiry</span><i className="floating-action-icon"><Icons.ClipboardPenLine aria-hidden="true"/></i></button>
-      <a className="floating-action floating-whatsapp" href={whatsapp('Hello UJR TradeSource, I would like to make an enquiry.')} target="_blank" rel="noreferrer" aria-label="Enquire on WhatsApp"><span className="floating-action-label">WhatsApp</span><i className="floating-action-icon"><Icons.MessageCircle aria-hidden="true"/><Icons.Phone className="whatsapp-phone" aria-hidden="true"/></i></a>
+    <div className="floating-actions" aria-label={t('floating.quickContact')}>
+      <button ref={triggerRef} className="floating-action floating-enquiry" type="button" onClick={()=>setOpen(true)} aria-haspopup="dialog"><span className="floating-action-label">{t('floating.makeEnquiry')}</span><i className="floating-action-icon"><Icons.ClipboardPenLine aria-hidden="true"/></i></button>
+      <a className="floating-action floating-whatsapp" href={whatsapp(t('floating.whatsappMessage'))} target="_blank" rel="noreferrer" aria-label={t('floating.whatsappLabel')}><span className="floating-action-label">{t('floating.whatsapp')}</span><i className="floating-action-icon"><Icons.MessageCircle aria-hidden="true"/><Icons.Phone className="whatsapp-phone" aria-hidden="true"/></i></a>
     </div>
     {open&&<div className="enquiry-modal-backdrop" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)setOpen(false)}}>
       <section className="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enquiry-title">
-        <button className="enquiry-close" type="button" onClick={()=>setOpen(false)} aria-label="Close enquiry form"><Icons.X/></button>
-        <div className="enquiry-modal-heading"><span><Icons.ClipboardPenLine/></span><div><p className="eyebrow">Let’s work together</p><h2 id="enquiry-title">Make an enquiry</h2><p>Tell us what you need and our team will get back to you.</p></div></div>
+        <button className="enquiry-close" type="button" onClick={()=>setOpen(false)} aria-label={t('enquiry.close')}><Icons.X/></button>
+        <div className="enquiry-modal-heading"><span><Icons.ClipboardPenLine/></span><div><p className="eyebrow">{t('enquiry.kicker')}</p><h2 id="enquiry-title">{t('enquiry.title')}</h2><p>{t('enquiry.intro')}</p></div></div>
         <form className="enquiry-form" onSubmit={event=>event.preventDefault()}>
-          <label className="field-wide" htmlFor="enquiry-name">Full name<input ref={firstFieldRef} id="enquiry-name" name="fullName" type="text" autoComplete="name" required placeholder="Enter your full name"/></label>
-          <label htmlFor="enquiry-company">Company<input id="enquiry-company" name="company" type="text" autoComplete="organization" required placeholder="Company name"/></label>
-          <label htmlFor="enquiry-email">Email<input id="enquiry-email" name="email" type="email" autoComplete="email" required placeholder="name@company.com"/></label>
-          <label className="field-wide" htmlFor="enquiry-contact">Contact No.<input id="enquiry-contact" name="contactNumber" type="tel" autoComplete="tel" required placeholder="Enter your contact number"/></label>
-          <label className="field-wide" htmlFor="enquiry-message">Enquiry or feedback<textarea id="enquiry-message" name="message" rows={5} required placeholder="How can we help you?"/></label>
-          <button className="button button-blue enquiry-submit field-wide" type="submit">Submit enquiry <Icons.ArrowRight size={17}/></button>
+          <label className="field-wide" htmlFor="enquiry-name">{t('enquiry.fullName')}<input ref={firstFieldRef} id="enquiry-name" name="fullName" type="text" autoComplete="name" required placeholder={t('enquiry.fullNamePlaceholder')}/></label>
+          <label htmlFor="enquiry-company">{t('enquiry.company')}<input id="enquiry-company" name="company" type="text" autoComplete="organization" required placeholder={t('enquiry.companyPlaceholder')}/></label>
+          <label htmlFor="enquiry-email">{t('enquiry.email')}<input id="enquiry-email" name="email" type="email" autoComplete="email" required placeholder={t('enquiry.emailPlaceholder')}/></label>
+          <label className="field-wide" htmlFor="enquiry-contact">{t('enquiry.contact')}<input id="enquiry-contact" name="contactNumber" type="tel" autoComplete="tel" required placeholder={t('enquiry.contactPlaceholder')}/></label>
+          <label className="field-wide" htmlFor="enquiry-message">{t('enquiry.message')}<textarea id="enquiry-message" name="message" rows={5} required placeholder={t('enquiry.messagePlaceholder')}/></label>
+          <button className="button button-blue enquiry-submit field-wide" type="submit">{t('enquiry.submit')} <Icons.ArrowRight size={17}/></button>
         </form>
       </section>
     </div>}
