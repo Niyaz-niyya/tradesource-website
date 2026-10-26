@@ -88,7 +88,7 @@ function LanguagePicker({ locale, onPrimary }: { locale: Locale; onPrimary: (l: 
 }
 
 function Header({ locale }: { locale: Locale }) {
-  const { t } = useTranslation(); const navigate = useNavigate(); const location = useLocation(); const [menu, setMenu] = useState(false); const [dark, setDark] = useState(() => localStorage.getItem('ujr-theme') === 'dark' || (!localStorage.getItem('ujr-theme') && matchMedia('(prefers-color-scheme: dark)').matches));
+  const { t } = useTranslation(); const navigate = useNavigate(); const location = useLocation(); const [menu, setMenu] = useState(false); const [dark, setDark] = useState(() => localStorage.getItem('ujr-theme') === 'dark');
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('ujr-theme', dark ? 'dark' : 'light') }, [dark]);
   const switchLocale = (next: Locale) => { const rest = location.pathname.replace(/^\/(en|zh|ar)/, ''); navigate(`/${next}${rest || '/'}`) };
   const nav = [['home', ''], ['about', 'about'], ['products', 'products'], ['services', 'services'], ['contact', 'contact']];

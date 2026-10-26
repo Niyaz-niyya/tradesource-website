@@ -107,3 +107,5 @@ section[id],article[id]{scroll-margin-top:90px}
 @keyframes modalFade{from{opacity:0}to{opacity:1}}
 @keyframes modalRise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:600px){.floating-actions{right:14px;bottom:16px;gap:8px}.floating-action{height:52px;max-width:52px;border-radius:26px}.floating-action-icon{width:52px;height:52px;flex-basis:52px}.floating-action:hover,.floating-action:focus-visible{max-width:52px;transform:none}.floating-action:hover .floating-action-label,.floating-action:focus-visible .floating-action-label{max-width:0;opacity:0;padding:0}.enquiry-modal-backdrop{padding:12px;align-items:end}.enquiry-modal{max-height:calc(100vh - 24px);border-radius:20px 20px 14px 14px;padding:25px 18px 20px}.enquiry-form{grid-template-columns:1fr;gap:14px}.enquiry-form .field-wide{grid-column:auto}.enquiry-modal-heading{padding-right:38px}.enquiry-modal-heading>span{width:42px;height:42px}.enquiry-modal-heading h2{font-size:24px}[dir="rtl"] .floating-actions{right:auto;left:14px}}
+
+@media(max-width:480px){.theme{display:flex}}
