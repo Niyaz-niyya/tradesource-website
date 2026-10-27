@@ -24,7 +24,96 @@ export const categories: Category[] = [
   { slug:'toys-games-sports', title:l('Toys, Games & Sports Accessories','玩具、游戏与运动配件','الألعاب والإكسسوارات الرياضية'), description:l('Products for play, learning, movement and wellbeing.','融合娱乐、学习、运动与健康的产品。','منتجات للعب والتعلّم والحركة والعافية.'), subcategories:[l('Toys & Educational Products','玩具与益智产品','ألعاب ومنتجات تعليمية'),l('Games & Puzzles','游戏与拼图','ألعاب وألغاز'),l('Fitness Accessories','健身配件','إكسسوارات لياقة'),l('Sports Equipment','运动器材','معدات رياضية')], imagePosition:'100% 50%' },
   { slug:'machinery-hardware', title:l('Machinery, Equipment & Hardware','机械、设备与五金','الآلات والمعدات والعدد'), description:l('Practical industrial solutions for demanding operations.','满足严苛作业需求的实用工业方案。','حلول صناعية عملية للعمليات المتطلبة.'), subcategories:[l('Industrial Machinery','工业机械','آلات صناعية'),l('Tools & Hardware','工具与五金','أدوات ومعدات'),l('Agricultural Equipment','农业设备','معدات زراعية'),l('Electrical & Mechanical Equipment','机电设备','معدات كهربائية وميكانيكية')], imagePosition:'0% 100%' },
   { slug:'automotive-parts', title:l('Automotive Parts & Accessories','汽车零部件与配件','قطع وإكسسوارات السيارات'), description:l('Quality-focused parts and accessories for mobility markets.','面向出行市场的品质汽车零配件。','قطع وإكسسوارات بجودة عالية لأسواق المركبات.'), subcategories:[l('Auto Spare Parts','汽车备件','قطع غيار سيارات'),l('Car Accessories','汽车配件','إكسسوارات سيارات'),l('Motorcycle Parts & Accessories','摩托车零配件','قطع وإكسسوارات دراجات'),l('Vehicle Care Products','车辆养护用品','منتجات العناية بالمركبات')], imagePosition:'33.333% 100%' },
+  { slug:'beauty-cosmetics', title:l('Beauty & Cosmetics','美容与化妆品','الجمال ومستحضرات التجميل'), description:l('Beauty, grooming and personal care product sourcing.','美容、个护与美妆产品采购。','توريد منتجات الجمال والعناية الشخصية.'), subcategories:[l('Skincare Products','护肤产品','منتجات العناية بالبشرة'),l('Makeup & Cosmetics','彩妆与化妆品','مكياج ومستحضرات تجميل'),l('Hair Care Products','护发产品','العناية بالشعر'),l('Personal Care & Grooming','个人护理','العناية الشخصية'),l('Perfumes & Fragrances','香水与香氛','عطور وروائح'),l('Beauty Tools & Accessories','美容工具与配件','أدوات وإكسسوارات الجمال')], imagePosition:'66.666% 100%' },
+  { slug:'packaging-materials', title:l('Packaging Materials','包装材料','مواد التعبئة والتغليف'), description:l('Flexible packaging options for products and brands.','为产品与品牌提供灵活包装方案。','خيارات تغليف مرنة للمنتجات والعلامات.'), subcategories:[l('Paper & Cardboard Packaging','纸质与纸板包装','تغليف ورقي وكرتوني'),l('Plastic Packaging Materials','塑料包装材料','مواد تغليف بلاستيكية'),l('Bottles, Jars & Containers','瓶、罐与容器','زجاجات وعبوات وحاويات'),l('Flexible Packaging & Pouches','软包装与袋装','تغليف مرن وأكياس'),l('Custom & Branded Packaging','定制与品牌包装','تغليف مخصص وبعلامة تجارية'),l('Labels, Stickers & Adhesive Tapes','标签、贴纸与胶带','ملصقات وأشرطة لاصقة')], imagePosition:'100% 100%' }
 ];
+
+const detailedSubcategories: Record<string, LocalizedText[]> = {
+  'electronics-gadgets': [
+    l('Audio & Speakers','音频与扬声器','الصوت ومكبرات الصوت'),
+    l('Smart Devices & Wearables','智能设备与可穿戴设备','الأجهزة الذكية والقابلة للارتداء'),
+    l('Cameras & CCTV','摄像机与监控设备','الكاميرات وأنظمة المراقبة'),
+    l('Gaming Accessories','游戏配件','ملحقات الألعاب'),
+    l('Chargers & Power Banks','充电器与移动电源','الشواحن وبنوك الطاقة'),
+    l('LED & Electronic Components','LED 与电子元件','مصابيح LED والمكونات الإلكترونية')
+  ],
+  'mobile-computer-accessories': [
+    l('Phone Cases & Screen Protectors','手机壳与屏幕保护膜','أغطية الهواتف وواقيات الشاشة'),
+    l('Cables & Chargers','线缆与充电器','الكابلات والشواحن'),
+    l('Power Banks','移动电源','بنوك الطاقة'),
+    l('Laptop & Tablet Accessories','笔记本电脑与平板配件','ملحقات الحواسيب المحمولة والأجهزة اللوحية'),
+    l('Keyboards & Mice','键盘与鼠标','لوحات المفاتيح والفأرات'),
+    l('USB Hubs & Storage','USB 集线器与存储设备','موزعات USB ووحدات التخزين')
+  ],
+  'clothing-fashion-textiles': [
+    l("Men’s & Women’s Clothing",'男女服装','ملابس رجالية ونسائية'),
+    l("Kids’ Clothing",'童装','ملابس الأطفال'),
+    l('Sportswear & Ethnic Wear','运动服与民族服饰','الملابس الرياضية والتقليدية'),
+    l('Fabrics & Textiles','面料与纺织品','الأقمشة والمنسوجات'),
+    l('Uniforms & Workwear','制服与工作服','الزي الموحد وملابس العمل')
+  ],
+  'shoes-bags-leather': [
+    l("Men’s & Women’s Footwear",'男女鞋','أحذية رجالية ونسائية'),
+    l("Women’s & Kids’ Footwear",'女鞋与童鞋','أحذية نسائية وأطفال'),
+    l('Sports & Safety Shoes','运动鞋与安全鞋','أحذية رياضية وأحذية سلامة'),
+    l('Handbags & Backpacks','手提包与背包','حقائب يد وظهر'),
+    l('Travel & Laptop Bags','旅行包与电脑包','حقائب سفر ولابتوب'),
+    l('Wallets & Belts','钱包与皮带','محافظ وأحزمة')
+  ],
+  'watches-jewelry': [
+    l("Men’s & Women’s Watches",'男女腕表','ساعات رجالية ونسائية'),
+    l('Smartwatch Accessories','智能手表配件','ملحقات الساعات الذكية'),
+    l('Necklaces & Pendants','项链与吊坠','قلائد ودلايات'),
+    l('Rings & Earrings','戒指与耳环','خواتم وأقراط'),
+    l('Bracelets & Bangles','手链与手镯','أساور وبناجر'),
+    l('Jewelry Sets','珠宝套装','أطقم مجوهرات')
+  ],
+  'furniture-home-decor': [
+    l('Living & Bedroom Furniture','客厅与卧室家具','أثاث غرف المعيشة والنوم'),
+    l('Office Furniture','办公家具','أثاث مكتبي'),
+    l('Outdoor Furniture','户外家具','أثاث خارجي'),
+    l('Home Décor & Wall Art','家居装饰与墙面艺术','ديكور منزلي وفنون جدارية'),
+    l('Lighting & Lamps','照明与灯具','إضاءة ومصابيح'),
+    l('Storage & Organization','收纳整理','التخزين والتنظيم')
+  ],
+  'kitchen-household': [
+    l('Cookware & Utensils','炊具与厨具','أواني وأدوات الطبخ'),
+    l('Tableware & Cutlery','餐具与刀叉','أدوات المائدة وأدوات القطع'),
+    l('Kitchen Storage','厨房收纳','تخزين المطبخ'),
+    l('Small Kitchen Appliances','小型厨房电器','أجهزة مطبخ صغيرة'),
+    l('Cleaning & Laundry','清洁与洗衣用品','مستلزمات التنظيف والغسيل'),
+    l('Bathroom Accessories','浴室配件','ملحقات الحمام')
+  ],
+  'toys-games-sports': [
+    l('Educational & STEM Toys','益智与 STEM 玩具','ألعاب تعليمية وSTEM'),
+    l('Dolls & Action Figures','玩偶与动作人偶','دمى وشخصيات مجسمة'),
+    l('Board Games & Puzzles','桌游与拼图','ألعاب لوحية وألغاز'),
+    l('Outdoor & RC Toys','户外与遥控玩具','ألعاب خارجية وألعاب تحكم عن بعد'),
+    l('Sports Equipment','运动器材','معدات رياضية'),
+    l('Fitness & Camping Accessories','健身与露营配件','ملحقات اللياقة والتخييم')
+  ],
+  'machinery-hardware': [
+    l('Industrial Machinery','工业机械','آلات صناعية'),
+    l('Agricultural Equipment','农业设备','معدات زراعية'),
+    l('Construction Equipment','建筑设备','معدات البناء'),
+    l('Power & Hand Tools','电动与手动工具','أدوات كهربائية ويدوية'),
+    l('Fasteners & Building Hardware','紧固件与建筑五金','مثبتات ومعدات بناء'),
+    l('Pumps, Motors & Spare Parts','泵、电机与备件','مضخات ومحركات وقطع غيار')
+  ],
+  'automotive-parts': [
+    l('Car Interior & Exterior Accessories','汽车内外饰配件','ملحقات داخلية وخارجية للسيارات'),
+    l('Car Electronics & Lighting','汽车电子与照明','إلكترونيات وإضاءة السيارات'),
+    l('Engine & Mechanical Parts','发动机与机械部件','أجزاء المحرك والأجزاء الميكانيكية'),
+    l('Brakes & Suspension','制动与悬挂','الفرامل ونظام التعليق'),
+    l('Filters & Electrical Parts','滤清器与电气部件','الفلاتر والأجزاء الكهربائية'),
+    l('Motorcycle Accessories','摩托车配件','ملحقات الدراجات النارية')
+  ]
+};
+
+for (const category of categories) {
+  const subcategories = detailedSubcategories[category.slug];
+  if (subcategories) category.subcategories = subcategories;
+}
 
 export const services: Service[] = [
   {slug:'product-sourcing',icon:'Search',title:l('Product Sourcing','产品采购','توريد المنتجات'),description:l('We identify suitable manufacturers and compare options for quality, capability and value.','我们筛选合适制造商，并从质量、产能与价值维度比较方案。','نحدد المصنّعين المناسبين ونقارن الخيارات من حيث الجودة والقدرة والقيمة.')},
